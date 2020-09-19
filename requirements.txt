@@ -1,3 +1,5 @@
 aioredis
 asyncpg
 websockets
+pydantic
+psycopg2

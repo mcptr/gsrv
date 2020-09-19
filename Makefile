@@ -48,7 +48,7 @@ run-web:
 initdb:
 	dropdb --if-exists $(PROJECT_NAME)
 	createdb -E utf8 $(PROJECT_NAME)
-# 	cd gsrv/sql && psql -1 $(PROJECT_NAME) < loader.sql
+	cd gsrv/sql && psql -1 $(PROJECT_NAME) < loader.sql
 
 
 include mk/base.mk
