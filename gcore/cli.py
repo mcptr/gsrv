@@ -5,8 +5,8 @@ import os
 
 
 LOG_FORMAT = " ".join([
-    "%(levelname)-8s %(asctime)s %(name)-16s %(module)-24s",
-    "%(funcName)-16s %(message)s",
+    "%(levelname)-8s %(asctime)s | %(name)-24s",
+    "%(funcName)-32s | %(message)s",
 ])
 
 
@@ -42,7 +42,7 @@ def create_generic_parser(*args, **kwargs):
     group = parser.add_argument_group("Generic")
     group.add_argument("-D", "--debug", action="store_true")
     group.add_argument("-A", "--aio-debug", action="store_true")
-    group.add_argument("-E", "--no-exception-handler", action="store_true")
+    group.add_argument("-E", "--aio-no-exception-handler", action="store_true")
     group.add_argument("-v", "--verbose", action="store_true")
     return parser
 

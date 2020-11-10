@@ -1,1 +1,1 @@
-from .base import BaseTest, AsyncTest  # noqa
+from .base import Test, AsyncTest  # noqa

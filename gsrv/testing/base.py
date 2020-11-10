@@ -14,7 +14,7 @@ def tearDownModule(self):
     Postgresql.clear_cache()
 
 
-class BaseTest:
+class _BaseTest:
     ENABLE_POSTGRES = False
     POSTGRES_POOL_MINSIZE = 1
     POSTGRES_POOL_MAXSIZE = 5
@@ -34,7 +34,11 @@ class BaseTest:
             cls._srv_pg.stop()
 
 
-class AsyncTest(BaseTest, unittest.IsolatedAsyncioTestCase):
+class Test(_BaseTest, unittest.TestCase):
+    pass
+
+
+class AsyncTest(_BaseTest, unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         if self.ENABLE_POSTGRES:
             self.logger.debug("Creating pg pool")

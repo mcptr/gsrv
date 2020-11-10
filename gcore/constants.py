@@ -1,0 +1,2 @@
+URL_PREFIX_MAIN = "/"
+URL_PREFIX_GAMES = "/games"

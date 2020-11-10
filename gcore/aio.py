@@ -33,7 +33,7 @@ async def shutdown(loop, sig=None):
 def handle_exception(loop, context, *args, **kwargs):
     msg = context.get("exception", context["message"])
     logging.error("Caught exception: %s", msg)
-    # logging.error(context)
+    logging.exception(context)
     # asyncio.ensure_future(shutdown(loop))
 
 
@@ -55,14 +55,15 @@ def run(coro, **kwargs):
     terminate_func = kwargs.pop("terminate", None)
 
     loop = asyncio.get_event_loop()
-    if not kwargs.pop("no_exception_handler", False):
-        loop.set_exception_handler(handle_exception)
+    if not kwargs.pop("aio_no_exception_handler", False):
+        exception_handler = kwargs.pop("exception_handler", handle_exception)
+        loop.set_exception_handler(exception_handler)
 
     setup_signals(loop, terminate_func)
 
     try:
         loop.run_until_complete(coro)
-    except asyncio.exceptions.CancelledError as e:
+    except asyncio.exceptions.CancelledError:
         # logging.error(e)
         pass
     finally:

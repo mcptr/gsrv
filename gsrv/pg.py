@@ -1,4 +1,4 @@
-from gcore.dtypes import JSONEncoder
+from gsrv.dtypes import JSONEncoder
 import asyncpg
 import json
 import logging
@@ -56,7 +56,7 @@ async def transaction(pool):
             await tx.commit()
 
 
-async def create_pg_pool(url, **kwargs):
+async def create_pg_pool(url=None, **kwargs):
     logging.debug("Initializing PG pool")
     pgpool = await asyncpg.create_pool(
         url,
