@@ -124,11 +124,10 @@ class GameDriver(_GameDriver):
                 msg = IncomingMessage.loads(msg)
                 await self.on_message(msg, connection)
         except Exception as e:
-            print("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", e)
+            self.logger.exception(e)
 
-        # print("HANDLE SESSION FINI", connection, connection.ws.open)
-        # await self.remove_connection(connection)
-        # self.logger.info("Finished: %s", connection)
+        await self.remove_connection(connection)
+        self.logger.info("Finished: %s", connection)
 
     async def on_message(self,
                          msg: IncomingMessage,
